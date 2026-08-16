@@ -36,37 +36,37 @@
 ### 方式 1：DSH 一键安装（Windows PowerShell）
 
 ```powershell
-irm https://raw.githubusercontent.com/RomantiCX77/dsh-mathmodel-skills/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/RomantiCXinSDU/dsh-mathmodel-skills/main/install.ps1 | iex
 ```
 
 或手动：
 
 ```powershell
-git clone https://github.com/RomantiCX77/dsh-mathmodel-skills.git "$env:USERPROFILE\.dsh\skills"
+git clone https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git "$env:USERPROFILE\.dsh\skills"
 ```
 
 ### 方式 2：DSH 一键安装（Linux / macOS）
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RomantiCX77/dsh-mathmodel-skills/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/RomantiCXinSDU/dsh-mathmodel-skills/main/install.sh | bash
 ```
 
 或手动：
 
 ```bash
-git clone https://github.com/RomantiCX77/dsh-mathmodel-skills.git ~/.dsh/skills
+git clone https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git ~/.dsh/skills
 ```
 
 ### 方式 3：Claude Code / Codex 等 Agent Skills 工具
 
 ```bash
-npx -y skills@latest add RomantiCX77/dsh-mathmodel-skills --skill '*' --agent claude-code codex
+npx -y skills@latest add RomantiCXinSDU/dsh-mathmodel-skills --skill '*' --agent claude-code codex
 ```
 
 ### 方式 4：手动下载（任何环境）
 
 ```bash
-git clone https://github.com/RomantiCX77/dsh-mathmodel-skills.git
+git clone https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git
 # 把 skills/ 下 6 个目录复制到你的 agent 的 skills 目录即可
 ```
 

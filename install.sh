@@ -2,7 +2,7 @@
 # dsh-mathmodel-skills 一键安装（Linux/macOS DSH）
 set -e
 DST="${DSH_HOME:-$HOME/.dsh}/skills"
-REPO="https://github.com/RomantiCX77/dsh-mathmodel-skills.git"
+REPO="https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git"
 TMP=$(mktemp -d)
 echo "==> 下载 $REPO"
 git clone --depth 1 "$REPO" "$TMP/repo"

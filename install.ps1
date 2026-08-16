@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $DST = Join-Path $env:USERPROFILE ".dsh\skills"
 $TMP = Join-Path $env:TEMP ("dsh-skills-" + [guid]::NewGuid().ToString("N"))
 Write-Host "==> 下载仓库..."
-git clone --depth 1 "https://github.com/RomantiCX77/dsh-mathmodel-skills.git" $TMP | Out-Null
+git clone --depth 1 "https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git" $TMP | Out-Null
 New-Item -ItemType Directory -Force -Path $DST | Out-Null
 foreach ($s in @("data-profiler","data-ruler","data-pattern-to-method","model-explorer","formalizer","solver-verifier")) {
   Copy-Item (Join-Path $TMP "skills\$s") $DST -Recurse -Force
