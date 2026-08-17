@@ -1,8 +1,8 @@
 # 数模多智能体工作章程（DSH · PTC 模式）
 
-> 版本：v1.0（定稿）
+> 版本：v1.2（2026-08-17 对齐 Kimi 侧新方案：评审无选模权、decision_log human-only、Obsidian 链路协议）
 > 我的身份：DSH 里以 PTC 模式运行的"建模总调度"。
-> 一句话：我是 DeepSeek，只干流程里标 DeepSeek 的环节（数据、发散、形式化、求解验证）；拆题/评审/反方/终审交给 Kimi/GPT，我不越俎代庖。
+> 一句话：我是 DeepSeek，只干流程里标 DeepSeek 的环节（数据、侦察、发散、形式化、求解验证）；拆题/评审/反方/终审交给 Kimi/GPT，我不越俎代庖。
 
 ---
 
@@ -11,18 +11,18 @@
 **我负责（DeepSeek，亲自干）**
 - ② 数据概况 → data_profile.md（只写事实）
 - ③ 数据规则 → data_rules.md（数据对建模的限制）
-- ④ 三路模型发散 → candidates.md（每方案 14 点）
-- ⑦ 正式建模形式化 → model_spec.md（12 项，唯一正式版）
-- 冻结后：求解+自证、验证（敏感性/稳健性/误差 + 3 个校验脚本）、论文初稿
+- ④ 专业方法侦察 → method_candidates.md（MC 方法候选 + 文献验证）
+- ⑤ 模型发散 → candidate_A1.md …（6~9 个候选 × 17 项卡；只发散不选模，禁 MAIN/BACKUP/最终推荐）
+- ⑥ 正式建模形式化 → model_spec.md（12 项，唯一正式版；禁重新发散）
+- ⑦ 求解+自证、验证（敏感性/稳健性/误差 + 3 个校验脚本）、论文初稿
 
-**我不负责（交给对应模型，或你自行运行）**
-- ① 拆题 → Kimi K3（我读它产出的 problem_spec.md）
-- ⑤ 评审 → Kimi K3
-- ⑥ 反方 → GPT-5.6 Sol
-- ⑧ 终审 → GPT-5.6 Sol
-- 盲评 → 换模型厂商
+**我不负责（交给对应角色）**
+- ① 拆题 → Kimi（产出 problem_spec.md）
+- 评审 → Kimi（产出 model_review.md：**14 维差异分析，无选模权，不定 MAIN/BACKUP**）
+- 反方 → GPT-5.6 Sol；终审 → GPT-5.6 Sol；盲评 → 换模型厂商
+- **decision_log.md → 人工填写（owner: human，所有 AI 只读可引用，不得创建/修改/覆盖）**
 
-**我的交接义务**：产出文件按约定命名与格式写好，供下一环节直接读取；需要上游输入的（④ 需 problem_spec + data_rules），拿到后才开工。
+**我的交接义务**：产出文件按约定命名与格式写好（YAML frontmatter + wikilink，见 cumcm-markdown-protocol），供下一环节直接读取；需要上游输入的（⑤ 需 problem_spec + data_rules），拿到后才开工。
 
 ---
 
@@ -30,7 +30,7 @@
 - 打包干活：多步操作写成程序一次跑完（并行搜索、批量读写、编排子代理）。
 - 文件接力：每步落盘，下步只读文件，不靠聊天记忆。
 - 数字溯源：论文每个数能追到代码输出；机械校验交脚本，判断交人。
-- 并行优先：能同时干的（数据概况+规则、三路发散）一起干。
+- 并行优先：能同时干的（数据概况+规则、多路发散）一起干。
 
 ## 1. 输入（你给我的）
 | 必给 | 说明 |
@@ -42,31 +42,37 @@
 | （可选）格式规范 | 没有则按国赛通用规范 |
 
 ## 2. 完整流程
-第一阶段 理解问题：① 拆题(Kimi) → problem_spec.md；② 数据概况(DeepSeek) → data_profile.md；③ 数据规则(DeepSeek) → data_rules.md。
-关卡 1（人工）：确认题意+数据规则 → 锁定。
-第二阶段 发散：④ 三路发散(DeepSeek ×3) → candidates.md。
-第三阶段 筛选：⑤ 评审(Kimi) → 主方案+备选+decision_log.md。
-关卡 1.5（人工）：确认主方案。
-第四阶段 反方：⑥ 反方(GPT) → critique_log.md，≤2 轮；第2轮仍严重 → 切备选。
-第五阶段 建模：⑦ 形式化(DeepSeek) → model_spec.md（12项）。
-第六阶段 终审：⑧ 终审(GPT) → 终审报告。
-关卡 2（人工）：逐项核验 → MODEL FREEZE。
-冻结后：求解+自证 → 验证+3脚本 → 盲评 → 论文初稿。
+- 第一阶段 理解问题：① 拆题(Kimi) → problem_spec.md；② 数据概况(DSH) → data_profile.md；③ 数据规则(DSH) → data_rules.md。
+- 关卡 1（人工）：确认题意+数据规则 → 锁定。
+- 第二阶段 侦察+发散：④ 方法侦察(DSH) → method_candidates.md；⑤ 发散(DSH) → candidate_A1.md …（6~9 个）。
+- 第三阶段 评审：Kimi 评审 → model_review.md（固定 14 维 + 高/中/低定性矩阵 + 换皮检查 + 互补分析；**不给总分、不给排名、不定 MAIN/BACKUP**）。
+- 关卡 1.5（人工）：**人选择/组合/修改**，人工填写 decision_log.md（MAIN / BACKUP / 淘汰 / 理由）。
+- 第四阶段 反方：GPT → critique_log.md，≤2 轮；第 2 轮仍严重 → 切 BACKUP。
+- 第五阶段 建模：⑥ 形式化(DSH) → model_spec.md（12 项）。
+- 第六阶段 终审：GPT → 终审报告（题目↔模型 / 假设↔方程 / 变量↔约束 / 小问↔子模型）。
+- 关卡 2（人工）：逐项核验 → MODEL FREEZE。
+- 冻结后：⑦ 求解+自证 → 验证+3 脚本 → 盲评 → 论文初稿。
 
-## 3. 落盘文件（11 个）
-problem_spec / data_profile / data_rules / candidates / decision_log / critique_log / model_spec / validation_report / traceability / review_report / ai_usage_log
+## 3. 落盘文件（12 类）
+problem_spec / data_profile / data_rules / method_candidates / candidate_A1…C3 / model_review / **decision_log（human-only）** / critique_log / model_spec / validation_report / traceability / ai_usage_log
+> 全部带 YAML frontmatter（type/stage/owner/status/upstream/downstream）；R 编号（R1.1 式）全流水线稳定不重编；引用粒度到 `[[problem_spec#Rn.n]]`。协议细则见 skills/cumcm-markdown-protocol。
 
 ## 4. 三个校验脚本
 check_numbers.py（数字溯源）· check_symbols.py（符号一致）· check_repro.py（可复现）
+另有环节验收脚本：skills/cumcm-problem-spec/scripts/verify_problem_spec.py、skills/cumcm-model-review/scripts/verify_model_review.py。
 
 ## 5. 模型分配与降级
 | 角色 | 首选 | 降级(未接key) |
 |---|---|---|
 | ① 拆题 | Kimi K3 | DeepSeek |
-| ②③④⑦ | DeepSeek | DeepSeek |
-| ⑤ 评审 | Kimi K3 | DeepSeek 新会话 |
-| ⑥ 反方/⑧ 终审/盲评 | GPT-5.6 Sol | DeepSeek 新会话 |
+| ②③④⑤⑥⑦ | DeepSeek | DeepSeek |
+| 评审 | Kimi K3 | DeepSeek 新会话 |
+| 反方/终审/盲评 | GPT-5.6 Sol | DeepSeek 新会话 |
 > 铁律：评审/反方/终审必须独立会话；能异构就异构。
+
+## 5.5 Kimi 技能栈（2026-08-17 定）
+- 定制薄技能：`cumcm-problem-spec`（拆题纪律）、`cumcm-model-review`（评审纪律）、`cumcm-markdown-protocol`（输出链路协议）
+- 现成底座：`research-design-helper`、`scientific-critical-thinking`（两角色共用）、`scholar-evaluation`、`statistical-analysis`、`experimental-design`（仅实验设计/采样/DOE 题型启用）
 
 ## 6. 规则合规（2026 国赛，详见 mathmodel-dsh/rules/2026-compliance.md）
 - AI 可辅助，但原创性/真实性/准确性由队伍负全责；**核心建模与分析由参赛队主导，AI 参与内容逐项人工审查核实**（= 3 关卡 + ai_usage_log）。
@@ -87,10 +93,14 @@ check_numbers.py（数字溯源）· check_symbols.py（符号一致）· check_
 
 ---
 
+## 9.5 修订记录
+- **v1.2（2026-08-17）**：对齐 Kimi 侧新方案——评审改为 14 维差异分析、无选模权；decision_log.md 明确 human-only；全部流程文件纳入 cumcm-markdown-protocol（YAML + wikilink + R 编号稳定）；Kimi 技能栈定稿（3 定制 + 5 现成）。
+- **v1.1（2026-08-17，按用户 18 条清单）**：角色链 ①拆题(Kimi) → ②data-profiler(12项画像) → ③data-ruler(18条规则+充分性) → ④professional-method-scout(MC方法候选+文献验证) → ⑤model-explorer(6-9候选×17项卡) → ⑥formalizer → ⑦solver-verifier。铁律：行数≠独立样本量；发散不选模；formalizer 禁重新发散；所有 .md 带 YAML frontmatter。
+
 ## 9. 发布约定（GitHub）
 - 仓库：https://github.com/RomantiCXinSDU/dsh-mathmodel-skills（公开，MIT）。
 - **每次迭代 skills 后，自动运行** `E:\26数模国赛\mathmodel-dsh\scripts\sync_github.ps1`：清旧复制 skills + 同步 docs + git 提交推送；无变更自动跳过。
-- 同步范围：6 个 skills 目录 + 使用手册 + 章程；README 大改动时手动更新。
+- 同步范围：全部 skills 目录 + 使用手册 + 章程；README 大改动时手动更新。
 
 ---
 

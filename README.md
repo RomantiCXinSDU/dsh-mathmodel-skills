@@ -1,137 +1,99 @@
 # dsh-mathmodel-skills
 
-**面向全国大学生数学建模竞赛（CUMCM）C 题的 6 个 DeepSeek Harness (DSH) Agent Skills**——从"数据概况 → 数据规则 → 结构识别与专业方法匹配 → 模型发散 → 形式化 → 求解验证"的全流程武器库，内嵌 2026 国赛合规约束与确定性校验脚本。
+**CUMCM（全国大学生数学建模竞赛）多智能体流水线技能包** —— 9 个 Agent Skills，把"拆题 → 数据 → 侦察 → 发散 → 评审 → 决策 → 形式化 → 求解验证"拆成各司其职的环节技能，适配 Kimi / DeepSeek / GPT / Claude / Codex 等任何兼容 SKILL.md 协议的 Agent。
 
-> Six Agent Skills for the DSH (DeepSeek Harness) covering the full CUMCM Problem-C workflow: data profiling, data rules, structure-to-method matching (a 45-class professional method arsenal), model exploration, formalization, and solve-and-verify — with deterministic verifiers and 2026 CUMCM compliance built in.
+> 设计理念：**AI 负责发散与审查，人负责拍板。** 选模权、组合权、决策权全部保留给人工关卡；每个环节的产出都是带 YAML frontmatter 和 Obsidian wikilink 的落盘文件，全流程可追溯。
 
----
+## 功能一览
 
-## ✨ 特性
-
-- **6 个 skill，一条流水线**：数据概况 → 数据规则 → 结构识别/方法匹配 → 三派发散 → 正式建模 → 求解验证；
-- **专业方法武器库 v2.0**：45+ 类专业方法（生存分析/混合效应/分位数回归/CoDA/排队论/报童模型/异常检测/因果推断……），按"结构信号 → 方法 → 评委解释句"检索；
-- **确定性机制**：每个 skill 带可运行脚本 + 校验器（10 项画像校验、10 条规则校验、3派×14点校验、12项规格校验、数字溯源/符号一致/可复现/合规审计、返工上限与冻结状态机）；
-- **机器管正确、人管判断**：论文数字必须有来源、符号必须与代码一致、程序必须可复现；
-- **2026 国赛合规内嵌**：AI 工具使用声明、附录源程序要求、联网边界（可查资料/用 AI，禁止抄当届实时解答、禁止与队外讨论）逐条写入每个 skill；
-- **零依赖门槛**：skill 本体是 Markdown + Python 标准库/pandas，Python ≥ 3.10。
-
-## 🗺️ 工作流
-
-```text
-题目 + 数据附件
-   │
-   ├─① 拆题（交给 Kimi/其他模型）→ problem_spec.md
-   │
-   ├─② data-profiler        → data_profile.md（10 项数据画像 + 图）
-   ├─③ data-ruler           → data_rules.md（10 条数据规则，人工锁死）
-   ├─④ data-pattern-to-method → method_matches.md（结构识别 → 专业方法匹配，带评委解释句）
-   ├─⑤ model-explorer       → candidates.md（统计/机理/数据三派，每方案 14 点）
-   ├─⑥ formalizer           → model_spec.md（12 项正式数学模型）
-   └─⑦ solver-verifier      → 代码 + 自证 + 敏感性/误差/对比 + validation_report.md
-                     【3 个人工关卡：锁规则 / 定主方案 / 终审冻结】
+```
+① 拆题(Kimi)      problem_spec.md        把题目看准：R 编号 / 七类数学元素 / 歧义清单
+② 数据概况(DSH)   data_profile.md        只写事实的 12 项数据画像
+③ 数据规则(DSH)   data_rules.md          18 条数据对建模的限制 + 充分性判断
+══ 关卡1（人工锁定）══
+④ 方法侦察(DSH)   method_candidates.md   数据特殊结构 → 专业方法候选（文献验证）
+⑤ 模型发散(DSH)   candidate_A1…C3.md     6~9 个候选 × 17 项卡，只发散不选模
+   评审(Kimi)     model_review.md        14 维差异分析 + 换皮检查 + 互补分析（无选模权）
+══ 关卡1.5（人工选模/组合/修改）→ decision_log.md（human-only）══
+反方(GPT)        critique_log.md        专攻 MAIN，≤2 轮
+⑥ 形式化(DSH)     model_spec.md          12 项唯一正式版，禁重新发散
+终审(GPT)        终审报告                题目↔模型 / 假设↔方程 / 变量↔约束 / 小问↔子模型
+══ 关卡2（人工核验）→ MODEL FREEZE ══
+⑦ 求解验证(DSH)   validation_report.md   求解+自证+敏感性/稳健性/误差 + 校验脚本
 ```
 
-## 📦 安装（终端命令，任选其一）
+## 技能清单
 
-### 方式 1：DSH 一键安装（Windows PowerShell）
+| Skill | 角色 | 输入 → 输出 |
+|---|---|---|
+| `cumcm-problem-spec` | ① 拆题（Kimi） | 赛题全文+附件 → problem_spec.md |
+| `data-profiler` | ② 数据概况（DeepSeek） | 数据附件 → data_profile.md |
+| `data-ruler` | ③ 数据规则（DeepSeek） | data_profile → data_rules.md |
+| `professional-method-scout` | ④ 方法侦察（DeepSeek） | 数据特殊结构 → method_candidates.md |
+| `model-explorer` | ⑤ 模型发散（DeepSeek） | problem_spec+data_rules → candidate_*.md |
+| `cumcm-model-review` | 评审（Kimi） | 全部上游 → model_review.md |
+| `formalizer` | ⑥ 形式化（DeepSeek） | decision_log+candidates → model_spec.md |
+| `solver-verifier` | ⑦ 求解验证（DeepSeek） | model_spec → 代码+结果+validation_report.md |
+| `cumcm-markdown-protocol` | 全体共用 | YAML/wikilink/R 编号输出协议 |
 
-```powershell
-irm https://raw.githubusercontent.com/RomantiCXinSDU/dsh-mathmodel-skills/main/install.ps1 | iex
-```
+每个技能自带：`SKILL.md`（纪律与流程）+ `references/`（检查清单、rubric、反模式）+ `templates/`（落盘模板）+ `scripts/`（确定性验收脚本）。
 
-或手动：
+## 安装（终端任选一种）
 
-```powershell
-git clone https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git "$env:USERPROFILE\.dsh\skills"
-```
-
-### 方式 2：DSH 一键安装（Linux / macOS）
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/RomantiCXinSDU/dsh-mathmodel-skills/main/install.sh | bash
-```
-
-或手动：
-
-```bash
-git clone https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git ~/.dsh/skills
-```
-
-### 方式 3：Claude Code / Codex 等 Agent Skills 工具
-
+**方式一：skills CLI（推荐，支持 Claude Code / Codex 等）**
 ```bash
 npx -y skills@latest add RomantiCXinSDU/dsh-mathmodel-skills --skill '*' --agent claude-code codex
 ```
 
-### 方式 4：手动下载（任何环境）
-
+**方式二：一键脚本**
 ```bash
-git clone https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git
-# 把 skills/ 下 6 个目录复制到你的 agent 的 skills 目录即可
+# Linux / macOS
+curl -fsSL https://raw.githubusercontent.com/RomantiCXinSDU/dsh-mathmodel-skills/main/install.sh | bash
+# 自定义目标目录：bash install.sh ~/.claude/skills
+```
+```powershell
+# Windows PowerShell
+irm https://raw.githubusercontent.com/RomantiCXinSDU/dsh-mathmodel-skills/main/install.ps1 | iex
 ```
 
-> 安装后重启/新开会话，skill 即被自动发现；之后说"做数据概况""结构识别"等触发词即自动加载。
-
-## 🚀 用法（赛时标准流程，直接照喊）
-
-| 顺序 | 触发词 | Skill | 产出 |
-|---|---|---|---|
-| 1 | "做数据概况 / EDA / 读数据" | data-profiler | data_profile.md + 分布图 |
-| 2 | "定数据规则 / 清洗口径" | data-ruler | data_rules.md（人工锁死）|
-| 3 | "结构识别 / 该用什么专业方法" | data-pattern-to-method | method_matches.md（带评委解释句）|
-| 4 | "发散模型 / 三派候选" | model-explorer | candidates.md |
-| 5 | "正式建模 / 写数学模型" | formalizer | model_spec.md |
-| 6 | "求解 / 验证 / 敏感性 / 误差分析" | solver-verifier | 代码 + 结果 + validation_report.md |
-
-**一句口诀**：概况 → 规则 → 结构匹配 → 发散 → 形式化 → 求解验证；三个关卡人点头；数字全部有来源。
-
-## 🧪 测试
-
-每个 skill 自带校验器，可对任意 CSV 自测：
-
+**方式三：手动**
 ```bash
-cd <skill>/scripts
-python profile.py 你的数据.csv --config 你的配置.json   # data-profiler
-python verify_profile.py                                 # 验收 10 项画像
-python match_methods.py 你的数据.csv --config 你的配置.json  # 结构识别→方法匹配
+git clone --depth 1 https://github.com/RomantiCXinSDU/dsh-mathmodel-skills.git
+cp -r dsh-mathmodel-skills/skills/* <你的Agent技能目录>/
+# Claude Code: ~/.claude/skills/   Codex: ~/.agents/skills/   Kimi: 受管 skills 目录
 ```
 
-配置 JSON 示例（指定目标列/ID列/题目语义信号）：
+安装后**新开 Agent 会话**生效。
 
-```json
-{ "target_col": "AB异常", "id_col": "ID", "event_hint": true, "error_required": true }
-```
+## 使用
 
-支持的语义信号：event_hint（事件时间）、error_required（误差影响）、quantile_hint（达标线）、queue（排队）、inventory（库存）、game（博弈）、mechanism（机理）、evaluation（评价）、ordinal（有序分类）、spatial（空间）、censored（删失）。
-
-## 📐 2026 国赛合规（已内嵌进每个 skill）
-
-- 核心建模与分析由参赛队主导，AI 参与内容逐项人工审查核实；
-- 论文参考文献前设「AI 工具使用声明」，用 AI 附《AI工具使用详情.pdf》；
-- 附录含全部可运行源程序，程序须可复现；
-- 联网边界：✅ 可联网查资料/用 AI；❌ 禁止抄当届赛题实时解答、禁止与队外讨论赛题。
-
-## 🗂️ 目录结构
-
+对话中点名触发，例如：
 ```text
-skills/
-├── data-profiler/          # SKILL.md + scripts(profile/verify) + references + templates
-├── data-ruler/             # SKILL.md + scripts(rules/verify) + references + templates
-├── data-pattern-to-method/ # SKILL.md + scripts(match_methods/verify) + 武器库 v2.0
-├── model-explorer/         # SKILL.md + scripts(recommend/verify×2) + 60+方法目录
-├── formalizer/             # SKILL.md + scripts(spec_scaffold/verify) + 12项模板
-└── solver-verifier/        # SKILL.md + scripts(校验×4+状态机) + 求解/敏感性 SOP
-docs/                       # 使用手册、工作章程
-install.sh / install.ps1    # 一键安装
-LICENSE                     # MIT
+加载 cumcm-problem-spec，拆这道题（附赛题 PDF）
+加载 model-explorer，基于 problem_spec 和 data_rules 发散候选模型
+加载 cumcm-model-review，评审 candidate_A1 到 C3
 ```
 
-## ⚠️ 说明
+完整流程与关卡约定见 `docs/数模工作章程_SOP.md`；DeepSeek 侧细则见 `docs/DSH技能栈使用手册.md`。
 
-- 本技能包是**辅助工具**，不替代参赛队主导；模型选择与结论由队伍人工核验负责；
-- 每个 skill 的确定性脚本不依赖任何大模型 API，可用纯 Python 独立运行验证；
-- 武器库方法条目为"结构识别 → 方法匹配"参考，实际使用须结合当年赛题与数据。
+## 合规声明（重要）
 
-## 📄 License
+本技能包按 **2026 国赛 AI 使用规定** 设计：核心建模与决策由参赛队主导（三个人工关卡写死在流程里），AI 产物须逐项人工审查，AI 使用需记入 `ai_usage_log` 并在论文附「AI 工具使用声明」。**赛期使用本包联网功能时，禁止检索当届赛题的思路与解答。**
 
-[MIT](LICENSE)
+## 自测
+
+```bash
+python test/test_full.py        # 全链路验收
+python skills/cumcm-problem-spec/scripts/verify_problem_spec.py <file>
+python skills/cumcm-model-review/scripts/verify_model_review.py <file>
+```
+
+## 致谢
+
+评审与拆题环节的部分检查清单吸收自以下公开仓库（MIT）：
+[handsomeZR-netizen/mathmodel-skill](https://github.com/handsomeZR-netizen/mathmodel-skill)、
+[davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)（peer-review）。
+
+## License
+
+MIT — 自由使用、修改、分发，欢迎 Star / Issue / PR。
