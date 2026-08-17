@@ -40,5 +40,6 @@
 - pipeline.py：状态机（返工上限 2 / 冻结门禁）
 
 ## 五、维护注意
-- 我迭代 skill 后会把 E:\26数模国赛\mathmodel-dsh\skills\ 重新复制到 C:\Users\Lenovo\.dsh\skills\；
+- 我迭代 skill 后会把 E:\26数模国赛\mathmodel-dsh\skills\ 重新复制到 C:\Users\Lenovo\.dsh\skills\（本地全局挂载）；
+- 同时自动运行 scripts\sync_github.ps1 推送到 GitHub（https://github.com/RomantiCXinSDU/dsh-mathmodel-skills）；
 - 联网边界：✅ 可联网查资料/用 AI；❌ 禁止搜当届赛题实时解答、禁止与队外讨论赛题。

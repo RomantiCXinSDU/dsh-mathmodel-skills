@@ -87,4 +87,11 @@ check_numbers.py（数字溯源）· check_symbols.py（符号一致）· check_
 
 ---
 
+## 9. 发布约定（GitHub）
+- 仓库：https://github.com/RomantiCXinSDU/dsh-mathmodel-skills（公开，MIT）。
+- **每次迭代 skills 后，自动运行** `E:\26数模国赛\mathmodel-dsh\scripts\sync_github.ps1`：清旧复制 skills + 同步 docs + git 提交推送；无变更自动跳过。
+- 同步范围：6 个 skills 目录 + 使用手册 + 章程；README 大改动时手动更新。
+
+---
+
 *本章程自定稿起生效，此后按此执行。*
