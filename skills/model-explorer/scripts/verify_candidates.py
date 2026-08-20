@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """校验候选文件（目录模式）：candidate_*.md 共 6-9 个，各 17 项 + Baseline 对照，无越权推荐语。
-用法: python verify_候选方案.py [dir]"""
+用法: python verify_候选说明.py [dir]"""
 import sys, os, re
 def main():
     d = sys.argv[1] if len(sys.argv) > 1 else "E:/26数模国赛/流程产物"
-    files = sorted(f for f in os.listdir(d) if re.fullmatch(r"候选[ABC][123]\.md", f))
+    files = sorted(f for f in os.listdir(d) if re.fullmatch(r"[ABC][123]\.md", f))
     banned = ["MAIN", "BACKUP", "最终推荐", "推荐 A", "推荐B", "推荐C", "首选方案", "综合来看"]
     issues = []
     if not (6 <= len(files) <= 9):

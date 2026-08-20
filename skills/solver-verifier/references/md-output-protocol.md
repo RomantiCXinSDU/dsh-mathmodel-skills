@@ -3,7 +3,7 @@
 ## 统一 YAML frontmatter
 \`\`\`yaml
 ---
-type: <data-profile|data-rules|method-candidates|candidates|decision-log|critique-log|model-spec|validation-report|traceability|ai-usage-log>
+type: <data-profile|data-rules|method-candidates|candidates|decision-log|critique-log|model-spec|validation-report|要求追踪|ai-usage-log>
 stage: <profiling|ruling|method-scout|exploration|judging|critique|formalization|verification>
 owner: <deepseek|kimi|gpt|human>
 status: <draft|review|locked|frozen>
@@ -15,9 +15,9 @@ downstream:
 \`\`\`
 
 ## 链接约定（Obsidian 兼容）
-- 要求链接：[[problem_spec#R1.1]]（覆盖哪些要求）
-- 规则链接：[[data_rules#规则 12]]
-- 方法链接：[[method_candidates#MC-02]]
+- 要求链接：[[问题拆解#R1.1]]（覆盖哪些要求）
+- 规则链接：[[数据规则#规则 12]]
+- 方法链接：[[方法候选#MC-02]]
 - 上游/下游放在 YAML frontmatter。
 
 ## 各文件 frontmatter 默认值
@@ -32,5 +32,5 @@ downstream:
 | 反方记录.md | critique-log | gpt |
 | 正式模型.md | model-spec | deepseek |
 | 验证报告.md | validation-report | deepseek |
-| 要求追踪.md | traceability | human |
+| 要求追踪.md | 要求追踪 | human |
 | AI使用台账.md | ai-usage-log | deepseek |

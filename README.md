@@ -7,16 +7,16 @@
 ## 功能一览
 
 ```
-① 拆题(Kimi)      拆题报告.md        把题目看准：R 编号 / 七类数学元素 / 歧义清单
+① 拆题(Kimi)      问题拆解.md        把题目看准：R 编号 / 七类数学元素 / 歧义清单
 ② 数据概况(DSH)   数据概况.md        只写事实的 12 项数据画像
 ③ 数据规则(DSH)   数据规则.md          18 条数据对建模的限制 + 充分性判断
 ══ 关卡1（人工锁定）══
 ④ 方法侦察(DSH)   方法候选.md   数据特殊结构 → 专业方法候选（文献验证）
-⑤ 模型发散(DSH)   候选_A1…C3.md     6~9 个候选 × 17 项卡，只发散不选模
-   评审(Kimi)     评审报告.md        14 维差异分析 + 换皮检查 + 互补分析（无选模权）
-══ 关卡1.5（人工选模/组合/修改）→ 决策日志.md（human-only）══
+⑤ 模型发散(DSH)   candidate_A1…C3.md     6~9 个候选 × 17 项卡，只发散不选模
+   评审(Kimi)     模型评审.md        14 维差异分析 + 换皮检查 + 互补分析（无选模权）
+══ 关卡1.5（人工选模/组合/修改）→ 选模决策.md（human-only）══
 反方(GPT)        反方记录.md        专攻 MAIN，≤2 轮
-⑥ 形式化(DSH)     模型规格.md          12 项唯一正式版，禁重新发散
+⑥ 形式化(DSH)     正式模型.md          12 项唯一正式版，禁重新发散
 终审(GPT)        终审报告                题目↔模型 / 假设↔方程 / 变量↔约束 / 小问↔子模型
 ══ 关卡2（人工核验）→ MODEL FREEZE ══
 ⑦ 求解验证(DSH)   验证报告.md   求解+自证+敏感性/稳健性/误差 + 校验脚本
@@ -26,14 +26,14 @@
 
 | Skill | 角色 | 输入 → 输出 |
 |---|---|---|
-| `cumcm-problem-spec` | ① 拆题（Kimi） | 赛题全文+附件 → 拆题报告.md |
+| `cumcm-problem-spec` | ① 拆题（Kimi） | 赛题全文+附件 → 问题拆解.md |
 | `data-profiler` | ② 数据概况（DeepSeek） | 数据附件 → 数据概况.md |
 | `data-ruler` | ③ 数据规则（DeepSeek） | 数据概况 → 数据规则.md |
 | `professional-method-scout` | ④ 方法侦察（DeepSeek） | 数据特殊结构 → 方法候选.md |
-| `model-explorer` | ⑤ 模型发散（DeepSeek） | 拆题报告+数据规则 → candidate_*.md |
-| `cumcm-model-review` | 评审（Kimi） | 全部上游 → 评审报告.md |
-| `formalizer` | ⑥ 形式化（DeepSeek） | 决策日志+候选方案 → 模型规格.md |
-| `solver-verifier` | ⑦ 求解验证（DeepSeek） | 模型规格 → 代码+结果+验证报告.md |
+| `model-explorer` | ⑤ 模型发散（DeepSeek） | 问题拆解+数据规则 → candidate_*.md |
+| `cumcm-model-review` | 评审（Kimi） | 全部上游 → 模型评审.md |
+| `formalizer` | ⑥ 形式化（DeepSeek） | 选模决策+候选说明 → 正式模型.md |
+| `solver-verifier` | ⑦ 求解验证（DeepSeek） | 正式模型 → 代码+结果+验证报告.md |
 | `cumcm-markdown-protocol` | 全体共用 | YAML/wikilink/R 编号输出协议 |
 
 每个技能自带：`SKILL.md`（纪律与流程）+ `references/`（检查清单、rubric、反模式）+ `templates/`（落盘模板）+ `scripts/`（确定性验收脚本）。
@@ -70,8 +70,8 @@ cp -r dsh-mathmodel-skills/skills/* <你的Agent技能目录>/
 对话中点名触发，例如：
 ```text
 加载 cumcm-problem-spec，拆这道题（附赛题 PDF）
-加载 model-explorer，基于 拆题报告 和 数据规则 发散候选模型
-加载 cumcm-model-review，评审 候选_A1 到 C3
+加载 model-explorer，基于 问题拆解 和 数据规则 发散候选模型
+加载 cumcm-model-review，评审 candidate_A1 到 C3
 ```
 
 完整流程与关卡约定见 `docs/数模工作章程_SOP.md`；DeepSeek 侧细则见 `docs/DSH技能栈使用手册.md`。
@@ -84,8 +84,8 @@ cp -r dsh-mathmodel-skills/skills/* <你的Agent技能目录>/
 
 ```bash
 python test/test_full.py        # 全链路验收
-python skills/cumcm-problem-spec/scripts/verify_拆题报告.py <file>
-python skills/cumcm-model-review/scripts/verify_评审报告.py <file>
+python skills/cumcm-problem-spec/scripts/verify_问题拆解.py <file>
+python skills/cumcm-model-review/scripts/verify_模型评审.py <file>
 ```
 
 ## 致谢

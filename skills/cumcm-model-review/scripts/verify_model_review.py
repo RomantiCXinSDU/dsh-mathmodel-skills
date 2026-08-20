@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""校验 评审报告.md：14 维 + 定性矩阵 + 换皮/互补 + 无越权措辞。用法: python verify_评审报告.py [path]"""
+"""校验 模型评审.md：14 维 + 定性矩阵 + 换皮/互补 + 无越权措辞。用法: python verify_模型评审.py [path]"""
 import re
 import sys
 
@@ -7,7 +7,7 @@ DIMS = ["Requirement 覆盖", "题目本质", "数据结构匹配", "假设", "�
         "Baseline", "可解释", "可验证", "数据需求", "计算复杂度",
         "最大失败风险", "失效边界", "互补", "高级但没必要"]
 SECTIONS = ["换皮检查", "比较矩阵", "互补关系", "风险与适用条件", "留给人工关卡"]
-# 越权措辞（选模权在人工，评审报告.md 中禁止出现）
+# 越权措辞（选模权在人工，模型评审.md 中禁止出现）
 FORBIDDEN = [
     (r"MAIN\s*[=＝:：]", "出现 MAIN 指定"),
     (r"BACKUP\s*[=＝:：]", "出现 BACKUP 指定"),
@@ -31,7 +31,7 @@ def check(path):
     for d in DIMS:
         if d not in txt:
             missing.append(f"14 维缺「{d}」")
-    if "证据" not in txt and "出处" not in txt and "[[拆题报告" not in txt:
+    if "证据" not in txt and "出处" not in txt and "[[问题拆解" not in txt:
         missing.append("矩阵未见证据标注（证据/出处/wikilink）")
     if re.search(r"\|\s*\|\s*\|", txt):
         missing.append("比较矩阵存在空白单元格，疑似未填写")
@@ -43,7 +43,7 @@ def check(path):
     return missing
 
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else "../流程产物/评审报告.md"
+    path = sys.argv[1] if len(sys.argv) > 1 else "../流程产物/模型评审.md"
     missing = check(path)
     if missing:
         print(f"FAIL: {len(missing)} 处缺失/违规"); [print("  " + m) for m in missing]; sys.exit(1)

@@ -34,7 +34,7 @@ description: 模型发散（候选空间构建）。按统计/概率派(A)、机
 
 ## 确定性内核
 - `scripts/recommend.py <data.csv> --config <cfg.json>`：数据驱动生成 6-9 候选种子（带角色定位）；
-- `scripts/verify_候选方案.py [dir]`：目录模式验收 候选*.md（6-9 个、17 项、Baseline、无越权），默认扫 E:\26数模国赛\流程产物。
+- `scripts/verify_候选说明.py [dir]`：目录模式验收 候选*.md（6-9 个、17 项、Baseline、无越权），默认扫 E:\26数模国赛\流程产物。
 
 ## 合规红线（2026 国赛，详见 references/2026-compliance.md）
 - 核心建模与分析由参赛队主导，AI 产物须逐项人工审查核实后方可采纳

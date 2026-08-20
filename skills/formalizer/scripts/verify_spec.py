@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""校验 模型规格.md：12 项齐全 + 对照表；组合模式查 M 链。用法: python verify_spec.py [path] [--decision <file>]"""
+"""校验 正式模型.md：12 项齐全 + 对照表；组合模式查 M 链。用法: python verify_spec.py [path] [--decision <file>]"""
 import sys, re
 def check(path):
     txt = open(path, encoding="utf-8").read()
@@ -15,7 +15,7 @@ def check(path):
             if "模型链数据流" not in txt: missing.append("模型链数据流")
     return missing
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "E:/26数模国赛/流程产物/正式模型.md"
+    path = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "E:/26数模国赛/流程产物/模型规格.md"
     missing = check(path)
     if missing: print("FAIL: 缺", missing); sys.exit(1)
     print("PASS: 12 项 + 对照表齐全" + (" + 模型链" if "--decision" in sys.argv else "")); sys.exit(0)

@@ -135,8 +135,8 @@ def main():
         ("evaluation", "[[数据规则#规则 10]]", "评价/筛选对象", "多指标综合", "AHP/TOPSIS/RFM/评分卡(按题选)", "筛选/评价类子问", "熵权TOPSIS一把梭缺业务解释"),
     ]:
         if cfg.get(key): add(rule_ref, structure, essence, m, cond, risk)
-    L = ["---", "type: method-候选方案", "stage: method-scout", "owner: deepseek", "status: draft",
-         "upstream:", '  - "[[数据规则]]"', "downstream:", '  - "[[候选方案]]"', "---", "",
+    L = ["---", "type: method-候选说明", "stage: method-scout", "owner: deepseek", "status: draft",
+         "upstream:", '  - "[[数据规则]]"', "downstream:", '  - "[[候选说明]]"', "---", "",
          "# 方法候选.md —— 专业方法候选（③ professional-method-scout 产出）", ""]
     L.append(f"## 数据：{data}（n={n}）"); L.append("")
     if hits:

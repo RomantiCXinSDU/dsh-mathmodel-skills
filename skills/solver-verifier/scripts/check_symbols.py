@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """check_symbols.py —— 符号一致性校验（确定性门禁）
 
-从 模型规格.md 提取 $...$ 符号定义，与代码目录中的变量名比对，报告无对应实现的符号。
-用法: python check_symbols.py <模型规格.md> <code_dir>
+从 正式模型.md 提取 $...$ 符号定义，与代码目录中的变量名比对，报告无对应实现的符号。
+用法: python check_symbols.py <正式模型.md> <code_dir>
 """
 import sys, os, re
 
@@ -28,7 +28,7 @@ def extract_code_names(code_dir):
 
 def main():
     if len(sys.argv) < 3:
-        print("用法: python check_symbols.py <模型规格.md> <code_dir>"); sys.exit(2)
+        print("用法: python check_symbols.py <正式模型.md> <code_dir>"); sys.exit(2)
     syms = extract_symbols(sys.argv[1])
     code = extract_code_names(sys.argv[2])
     missing = [s for s in sorted(syms) if not ({s, s.replace("_", "")} & code)]

@@ -1,18 +1,18 @@
 ---
 name: solver-verifier
-description: 求解与验证。按 模型规格 写求解代码并强制自证(verify PASS)，做基线对比/敏感性/稳健性/误差/极端条件分析，跑 check_numbers/check_symbols/check_repro/check_compliance 校验，输出 验证报告.md。当模型已冻结、需要求解和验证时使用。
+description: 求解与验证。按 正式模型 写求解代码并强制自证(verify PASS)，做基线对比/敏感性/稳健性/误差/极端条件分析，跑 check_numbers/check_symbols/check_repro/check_compliance 校验，输出 验证报告.md。当模型已冻结、需要求解和验证时使用。
 ---
 # solver-verifier — 求解与验证手（DeepSeek）
 
 ## 身份
-负责：**求解模型、自证正确、验证可靠。** 不改模型（改模型须回退 formalizer 并在 决策日志 留痕）。
+负责：**求解模型、自证正确、验证可靠。** 不改模型（改模型须回退 formalizer 并在 选模决策 留痕）。
 
 ## 前置（硬性）
-必须已有**冻结的** `模型规格.md`。
+必须已有**冻结的** `正式模型.md`。
 
 ## 三步流程
 ### 1 求解
-- 按 模型规格 写代码，默认 Python（numpy/scipy/pandas/sklearn）
+- 按 正式模型 写代码，默认 Python（numpy/scipy/pandas/sklearn）
 - **每个求解脚本配一个 `verify_*.py`**：校验约束满足/目标值/边界/数值稳定
 - 结果落盘 results/，图表存 results/figures/
 - 代码模板见 references/solver-sop.md
