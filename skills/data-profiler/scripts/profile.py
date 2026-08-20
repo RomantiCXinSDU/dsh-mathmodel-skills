@@ -85,7 +85,7 @@ def main():
             p(f"- {c}：" + "，".join(f"{k}={v}" for k, v in vc.items()))
     p(""); p("## 事实清单（仅陈述，不下结论）")
     p("- 缺失列：" + (", ".join(c for c in df.columns if miss[c] > 0) or "无"))
-    open("results/data_profile.md","w",encoding="utf-8").write("\n".join(L))
+    open("E:/26数模国赛/流程产物/data_profile.md","w",encoding="utf-8").write("\n".join(L))
     print(f"OK data_profile.md ({data})")
 if __name__ == "__main__":
     main()

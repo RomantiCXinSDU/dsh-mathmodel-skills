@@ -135,7 +135,7 @@ def main():
     else:
         p("- （待拆题结果 problem_spec 提供 Requirement 清单后，逐条填写充分性）")
     p("## 锁死清单（人工确认后不得改动）"); p("1. 缺失处理方式"); p("2. 离群处理方式"); p("3. 目标列与评价指标"); p("4. 独立样本单位口径")
-    open("results/data_rules.md","w",encoding="utf-8").write("\n".join(L))
+    open("E:/26数模国赛/流程产物/data_rules.md","w",encoding="utf-8").write("\n".join(L))
     print(f"OK data_rules.md ({data})")
 if __name__ == "__main__":
     main()

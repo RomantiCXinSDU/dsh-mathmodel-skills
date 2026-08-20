@@ -26,7 +26,8 @@ downstream:
 | data_profile.md | data-profile | deepseek |
 | data_rules.md | data-rules | deepseek |
 | method_candidates.md | method-candidates | deepseek |
-| candidates.md | candidates | deepseek |
+| candidate_A1.md ~ candidate_C3.md（每候选一文件） | candidate | deepseek |
+| model_review.md | model-review | kimi |
 | decision_log.md | decision-log | human |
 | critique_log.md | critique-log | gpt |
 | model_spec.md | model-spec | deepseek |

@@ -153,7 +153,7 @@ def main():
             L.append("")
     else:
         L.append("- 未检出特殊结构：常规线性/逻辑回归基线即可，不强行上专业方法。")
-    out = sys.argv[sys.argv.index("--out")+1] if "--out" in sys.argv else "results/method_candidates.md"
+    out = sys.argv[sys.argv.index("--out")+1] if "--out" in sys.argv else "E:/26数模国赛/流程产物/method_candidates.md"
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
     open(out, "w", encoding="utf-8").write("\n".join(L))
     print(f"OK {out} ({len(hits)} 个 MC)")

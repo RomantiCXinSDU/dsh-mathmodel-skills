@@ -15,7 +15,7 @@ def check(path):
             if "模型链数据流" not in txt: missing.append("模型链数据流")
     return missing
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "results/model_spec.md"
+    path = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "E:/26数模国赛/流程产物/model_spec.md"
     missing = check(path)
     if missing: print("FAIL: 缺", missing); sys.exit(1)
     print("PASS: 12 项 + 对照表齐全" + (" + 模型链" if "--decision" in sys.argv else "")); sys.exit(0)

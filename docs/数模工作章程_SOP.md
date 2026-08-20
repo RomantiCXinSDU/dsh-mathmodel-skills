@@ -53,10 +53,12 @@
 - 关卡 2（人工）：逐项核验 → MODEL FREEZE。
 - 冻结后：⑦ 求解+自证 → 验证+3 脚本 → 盲评 → 论文初稿。
 
-## 3. 落盘文件（12 类）
-problem_spec / data_profile / data_rules / method_candidates / candidate_A1…C3 / model_review / **decision_log（human-only）** / critique_log / model_spec / validation_report / traceability / ai_usage_log
-> 全部带 YAML frontmatter（type/stage/owner/status/upstream/downstream）；R 编号（R1.1 式）全流水线稳定不重编；引用粒度到 `[[problem_spec#Rn.n]]`。协议细则见 skills/cumcm-markdown-protocol。
-
+## 3. 落盘文件（全部在 Obsidian 库 E:\26数模国赛\流程产物\，总览.md 为首页）
+- problem_spec.md（①Kimi）→ data_profile.md（②）→ data_rules.md（③，关卡1锁定）
+- method_candidates.md（④）→ candidate_A1~A3 / B1~B3 / C1~C3（⑤，每候选一文件，17项卡）
+- model_review.md（⑥Kimi）→ critique_log.md（⑦GPT）→ decision_log.md（⑧，只有人能写）
+- model_spec.md（⑨，decision_log 唯一来源）→ validation_report.md（⑪）→ traceability.md + ai_usage_log.md（⑫）
+- 源码/真题/承诺书/图表全部留在库外（mathmodel-dsh/results 等），库内只有 .md
 ## 4. 三个校验脚本
 check_numbers.py（数字溯源）· check_symbols.py（符号一致）· check_repro.py（可复现）
 另有环节验收脚本：skills/cumcm-problem-spec/scripts/verify_problem_spec.py、skills/cumcm-model-review/scripts/verify_model_review.py。

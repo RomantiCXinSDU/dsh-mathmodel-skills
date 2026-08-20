@@ -41,6 +41,9 @@ description: 求解与验证。按 model_spec 写求解代码并强制自证(ver
 - 核心建模与分析由参赛队主导，AI 产物须逐项人工审查核实后方可采纳
 - 赛期禁止联网搜题/搜思路；引用公开资料须列参考文献
 - 本环节产出仅作草稿，最终须人工核验；AI 使用记入 ai_usage_log.md
+## 产物位置
+- `validation_report.md` 写到 **E:\26数模国赛\流程产物\**（库内）；代码/结果 json/图表留 mathmodel-dsh/results（库外）。
+
 ## 工具与参考（确定性）
 - `scripts/pipeline.py`：状态机（推进/审批/返工上限/冻结门禁）
 - `scripts/check_numbers.py` / check_symbols.py / check_repro.py

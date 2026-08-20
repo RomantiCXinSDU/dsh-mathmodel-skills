@@ -1,40 +1,5 @@
----
-type: candidates
-stage: -
-owner: deepseek
-status: draft
-upstream:
-  - "待填"
-downstream:
-  - "[[decision_log]]"
----
+# candidates.md —— 已改为"每候选一文件"模式
 
-# candidates.md —— 候选模型空间（⑤ model-explorer 产出，6-9 个候选）
-
-## A1（统计/概率派）
-1. 覆盖哪些 Requirement：
-2. 核心思想：
-3. 为什么适合本题：
-4. 利用了哪些数据特征：
-5. 数学/统计本质：
-6. 关键假设：
-7. 变量与参数：
-8. 数学结构：
-9. 用到哪些专业方法：
-10. 相比简单 Baseline 的优势：
-11. 最大风险：
-12. 什么情况下绝对不应该使用：
-13. 可解释性：
-14. 可验证性：
-15. 计算复杂度：
-16. 是否可以与其他候选组合：
-17. 可以和哪些候选组合：
-- Baseline 对照（最简单可用什么？为什么值得加复杂度？）：
-- 可组合层（最适合承担哪一层？）：
-
-## A2（同 17 项）
-## A3（如有）
-## B1 / B2 / B3（机理/优化派，同 17 项）
-## C1 / C2 / C3（数据驱动/混合派，同 17 项）
-
-> 铁律：禁止换皮模型；禁止出现 MAIN/BACKUP/最终推荐。
+> 候选不再是单个汇总文件。每个候选写独立文件 `candidate_XX.md`（XX∈{A1..A3,B1..B3,C1..C3}），
+> 落地到 Obsidian 库 `E:\26数模国赛\流程产物\`，格式用 [[candidate_card]] 模板（17 项 + Baseline + 可组合层）。
+> 验收：`scripts/verify_candidates.py`（目录模式）。

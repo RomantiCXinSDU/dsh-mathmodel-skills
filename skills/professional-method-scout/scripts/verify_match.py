@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """校验 method_candidates.md：MC 编号 + 必备字段齐全。"""
 import sys, re
-txt = open(sys.argv[1] if len(sys.argv) > 1 else "results/method_candidates.md", encoding="utf-8").read()
+txt = open(sys.argv[1] if len(sys.argv) > 1 else "E:/26数模国赛/流程产物/method_candidates.md", encoding="utf-8").read()
 mcs = re.findall(r"## MC-\d+", txt)
 issues = []
 if not mcs and "未检出特殊结构" not in txt: issues.append("无 MC 条目也无空说明")

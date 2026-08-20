@@ -43,7 +43,7 @@ def check(path):
     return missing
 
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else "results/model_review.md"
+    path = sys.argv[1] if len(sys.argv) > 1 else "../流程产物/model_review.md"
     missing = check(path)
     if missing:
         print(f"FAIL: {len(missing)} 处缺失/违规"); [print("  " + m) for m in missing]; sys.exit(1)

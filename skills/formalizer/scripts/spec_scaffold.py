@@ -94,7 +94,7 @@ def main():
         L.append("## 11. 适用范围"); L.append("- 待填"); L.append("")
         L.append("## 12. 模型风险"); L.append("- 待填"); L.append("")
         L.append("## 现实→数学对照表"); L.append("| 现实条件(题目原文) | R | 数学表达 | 符号 |"); L.append("|---|---|---|---|"); L.append("| 待填 | R? | 待填 | 待填 |")
-    out = arg("--out", "results/model_spec.md")
+    out = arg("--out", "E:/26数模国赛/流程产物/model_spec.md")
     open(out, "w", encoding="utf-8").write("\n".join(L))
     print(f"OK {out} (" + ("组合链" if m_lines else "单模型") + "模式)")
 if __name__ == "__main__":

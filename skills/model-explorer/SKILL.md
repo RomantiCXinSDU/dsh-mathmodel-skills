@@ -18,7 +18,7 @@ description: 模型发散（候选空间构建）。按统计/概率派(A)、机
 - A 统计/概率派：A1、A2、(A3)
 - B 机理/优化派：B1、B2、(B3)
 - C 数据驱动/混合派：C1、C2、(C3)
-写入 `candidates.md`。
+**每候选写入独立文件** `E:\26数模国赛\流程产物\candidate_XX.md`（XX∈{A1..A3,B1..B3,C1..C3}），库内不建汇总文件。
 
 ## 每个候选 = 17 项 Model Card（缺一不可）
 1 覆盖哪些 Requirement  2 核心思想  3 为什么适合本题  4 利用了哪些数据特征
@@ -34,7 +34,7 @@ description: 模型发散（候选空间构建）。按统计/概率派(A)、机
 
 ## 确定性内核
 - `scripts/recommend.py <data.csv> --config <cfg.json>`：数据驱动生成 6-9 候选种子（带角色定位）；
-- `scripts/verify_candidates.py`：验收 6-9 个、17 项齐全、Baseline 齐全、无越权推荐语。
+- `scripts/verify_candidates.py [dir]`：目录模式验收 candidate_*.md（6-9 个、17 项、Baseline、无越权），默认扫 E:\26数模国赛\流程产物。
 
 ## 合规红线（2026 国赛，详见 references/2026-compliance.md）
 - 核心建模与分析由参赛队主导，AI 产物须逐项人工审查核实后方可采纳
