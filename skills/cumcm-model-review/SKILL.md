@@ -16,7 +16,7 @@ description: CUMCM 模型评审纪律（Model Reviewer / Model Intelligence Anal
 2. **固定 14 维审查**（见 references/review_dimensions.md）：Requirement 覆盖 / 题目本质 / 数据结构匹配 / 假设合理性 / 结构性错误 / 相比 Baseline 的复杂度值不值 / 可解释性 / 可验证性 / 数据需求现实性 / 计算复杂度 / 最大失败风险 / 失效边界 / 互补性 / "高级但没必要"
 3. **定性比较矩阵**：高/中/低 + 每格一句证据
 4. **互补关系分析**：只提示"值得人工讨论"，不给组合结论
-5. 输出 `模型评审.md`（模板见 templates/模型评审_template.md）
+5. 输出 `模型评审.md`（模板见 templates/模型评审模板.md）
 
 ## FORBIDDEN（写死）
 - 不得确定 MAIN；不得确定 BACKUP

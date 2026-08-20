@@ -32,7 +32,7 @@ R 编号一旦建立**全流水线稳定不重编**，供 `[[问题拆解#R1.1]]
 - 禁止把不确定信息写成确定事实（不明字段标"待确认"）
 
 ## OUTPUT
-`问题拆解.md`，模板见 templates/问题拆解_template.md；YAML 与链路遵守 `cumcm-markdown-protocol`。每处拆解标注题目原文出处（页码/段落）。
+`问题拆解.md`，模板见 templates/问题拆解模板.md；YAML 与链路遵守 `cumcm-markdown-protocol`。每处拆解标注题目原文出处（页码/段落）。
 
 ## 工作方法
 - 三遍精读法、Qi 卡片、全局变量表、数据 schema 速扫边界：见 references/decomposition-checklist.md
