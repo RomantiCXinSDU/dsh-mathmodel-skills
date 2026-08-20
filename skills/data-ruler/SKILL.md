@@ -42,7 +42,11 @@ Requirement: R2.1
 - `scripts/verify_rules.py`：验收 18 条规则 + 充分性节齐全、每条有数字依据。
 
 ## 铁律
-- **行数 ≠ 独立样本量**：凡涉及推断，独立单位写对象数；
+- **行数 ≠ 独立样本量**：凡涉及推断，独立单位写对象数（更高层观察单位，见 data_profile §5）；
+- **观察单位从 data_profiler §5 继承**：若存在 [对象→事件→记录] 多层结构，先按对象层定"谁独立"，再按事件层处理重复检测，不得把同事件多条检测记录当作独立样本；
+- **IQR 只叫"极端观测候选"**，需结合语义（是否真异常/记录错误/真实极端个体/关键病例）判断，不得直接叫"异常值"；
+- **细胞空白 ≠ true missing**：对染色体非整倍体等高空值字段，按 NOT_APPLICABLE/SEMANTIC_NORMAL/STRUCTURAL_BLANK 判定后再决定如何处理；
+- **冲突 target 不得使用**：data_profile 触发 Contradiction Alarm 的字段（单类别疑似 target）禁止列为模型目标，转交拆题报告确认；
 - 规则经人工确认后锁死，后续环节不得擅自改。
 
 ## 合规红线（2026 国赛，详见 references/2026-compliance.md）

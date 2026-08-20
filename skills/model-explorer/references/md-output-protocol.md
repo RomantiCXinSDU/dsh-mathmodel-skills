@@ -34,3 +34,7 @@ downstream:
 | 验证报告.md | validation-report | deepseek |
 | 要求追踪.md | 要求追踪 | human |
 | AI使用台账.md | ai-usage-log | deepseek |
+
+## 空白语义约定
+- 数据概况/数据规则中对高空值字段标 RAW_BLANK/SEMANTIC_NORMAL/NOT_APPLICABLE/TRUE_MISSING 四类，禁止默认 true missing。
+- 数据概况 §5 必须输出观察单位发现（Composite Key Audit 组合键唯一率链）。
