@@ -23,14 +23,14 @@ downstream:
 ## 各文件 frontmatter 默认值
 | 文件 | type | owner |
 |---|---|---|
-| data_profile.md | data-profile | deepseek |
-| data_rules.md | data-rules | deepseek |
-| method_candidates.md | method-candidates | deepseek |
-| candidate_A1.md ~ candidate_C3.md（每候选一文件） | candidate | deepseek |
-| model_review.md | model-review | kimi |
-| decision_log.md | decision-log | human |
-| critique_log.md | critique-log | gpt |
-| model_spec.md | model-spec | deepseek |
-| validation_report.md | validation-report | deepseek |
-| traceability.md | traceability | human |
-| ai_usage_log.md | ai-usage-log | deepseek |
+| 数据概况.md | data-profile | deepseek |
+| 数据规则.md | data-rules | deepseek |
+| 方法候选.md | method-candidates | deepseek |
+| 候选A1.md ~ 候选C3.md（每候选一文件） | candidate | deepseek |
+| 模型评审.md | model-review | kimi |
+| 选模决策.md | decision-log | human |
+| 反方记录.md | critique-log | gpt |
+| 正式模型.md | model-spec | deepseek |
+| 验证报告.md | validation-report | deepseek |
+| 要求追踪.md | traceability | human |
+| AI使用台账.md | ai-usage-log | deepseek |

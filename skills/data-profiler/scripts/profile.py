@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""data-profiler 确定性实现：任意 CSV → data_profile.md（固定 12 项）。"""
+"""data-profiler 确定性实现：任意 CSV → 数据概况.md（固定 12 项）。"""
 import pandas as pd, numpy as np, os, sys, json
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -40,9 +40,9 @@ def main():
     L = []; p = L.append
     p("---"); p("type: data-profile"); p("stage: profiling"); p("owner: deepseek"); p("status: draft")
     p("upstream:"); p('  - "原始数据"')
-    p("downstream:"); p('  - "[[data_rules]]"')
+    p("downstream:"); p('  - "[[数据规则]]"')
     p("---"); p("")
-    p("# data_profile.md —— 数据概况（② data-profiler 产出）"); p("")
+    p("# 数据概况.md —— 数据概况（② data-profiler 产出）"); p("")
     p("## 1. 数据表/文件说明"); p(f"- 数据文件：{data}"); p(f"- 行列规模：{len(df)} 行 × {df.shape[1]} 列"); p("")
     p("## 2. 行代表什么"); p("- 一行代表一条观测记录" + (f"；{id_col} 为对象标识（同一对象可能多行，见 §7）" if id_col else "；未检测到对象标识列") + "。"); p("")
     p("## 3. 列代表什么"); p("| 列名 | 含义(待确认则标注) | 类型 | 取值域 |"); p("|---|---|---|---|")
@@ -50,7 +50,7 @@ def main():
         if c in hi: p(f"| {c} | 待确认 | 数值(连续) | {df[c].min():.3g} ~ {df[c].max():.3g} |")
         elif c in low: p(f"| {c} | 待确认 | 分类(数值编码) | {','.join(map(str, df[c].dropna().unique()[:8]))} |")
         else: p(f"| {c} | 待确认 | 分类 | {','.join(map(str, df[c].dropna().unique()[:6]))} |")
-    p(""); p("## 4. 样本量"); p(f"- 总行数 n={len(df)}" + (f"；独立对象数 {df[id_col].nunique()}" if id_col else "") + "。"); p("- 注意：行数 ≠ 独立样本量（重复观测时以对象数为准，详见 data_rules）。"); p("")
+    p(""); p("## 4. 样本量"); p(f"- 总行数 n={len(df)}" + (f"；独立对象数 {df[id_col].nunique()}" if id_col else "") + "。"); p("- 注意：行数 ≠ 独立样本量（重复观测时以对象数为准，详见 数据规则）。"); p("")
     p("## 5. 数据类型"); p(f"- 连续数值 {len(hi)} 个；数值编码分类 {len(low)} 个；分类/文本 {len(categorical)} 个。"); p("")
     p("## 6. 缺失值"); miss = df.isna().mean(); p("| 列 | 缺失率 |"); p("|---|---|")
     any_m = False
@@ -85,7 +85,7 @@ def main():
             p(f"- {c}：" + "，".join(f"{k}={v}" for k, v in vc.items()))
     p(""); p("## 事实清单（仅陈述，不下结论）")
     p("- 缺失列：" + (", ".join(c for c in df.columns if miss[c] > 0) or "无"))
-    open("E:/26数模国赛/流程产物/data_profile.md","w",encoding="utf-8").write("\n".join(L))
-    print(f"OK data_profile.md ({data})")
+    open("E:/26数模国赛/流程产物/数据概况.md","w",encoding="utf-8").write("\n".join(L))
+    print(f"OK 数据概况.md ({data})")
 if __name__ == "__main__":
     main()

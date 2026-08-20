@@ -4,9 +4,9 @@ stage: 模型发散
 owner: deepseek
 status: draft
 upstream:
-  - "[[method_candidates]]"
+  - "[[方法候选]]"
 downstream:
-  - "[[model_review]]"
+  - "[[评审报告]]"
 ---
 
 # candidate_XX —— 候选模型卡（⑤ 发散，17 项）

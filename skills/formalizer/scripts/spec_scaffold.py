@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
-"""spec_scaffold.py —— model_spec 骨架生成器。支持单模型 12 项；decision_log 含 M1/M2/M3 时生成组合模型链。
-用法: python spec_scaffold.py --model <名> [--data <csv> --config <cfg> --decision <decision_log.md> --out <path>]"""
+"""spec_scaffold.py —— 模型规格 骨架生成器。支持单模型 12 项；决策日志 含 M1/M2/M3 时生成组合模型链。
+用法: python spec_scaffold.py --model <名> [--data <csv> --config <cfg> --decision <决策日志.md> --out <path>]"""
 import sys, json, pandas as pd, re
 def arg(k, d=None):
     return sys.argv[sys.argv.index(k)+1] if k in sys.argv else d
@@ -37,8 +37,8 @@ def main():
         df = pd.read_csv(data, na_values=["?", "", "NA", "nan"])
         feats = [c for c in df.columns if c != target and df[c].nunique() > 1][:8]
     L = ["---", "type: model-spec", "stage: formalization", "owner: deepseek", "status: draft",
-         "upstream:", '  - "[[decision_log]]"', "downstream:", '  - "[[validation_report]]"', "---", "",
-         "# model_spec.md —— 正式模型（formalizer 产出）", ""]
+         "upstream:", '  - "[[决策日志]]"', "downstream:", '  - "[[验证报告]]"', "---", "",
+         "# 模型规格.md —— 正式模型（formalizer 产出）", ""]
     m_lines = []
     if decision:
         try:
@@ -47,7 +47,7 @@ def main():
         except Exception:
             pass
     if m_lines:
-        L.append("## 模型链总览（来源：decision_log，唯一决策）")
+        L.append("## 模型链总览（来源：决策日志，唯一决策）")
         for i, ml in enumerate(m_lines, 1):
             L.append(f"- M{i}：{ml.strip()}")
         L.append("")
@@ -94,7 +94,7 @@ def main():
         L.append("## 11. 适用范围"); L.append("- 待填"); L.append("")
         L.append("## 12. 模型风险"); L.append("- 待填"); L.append("")
         L.append("## 现实→数学对照表"); L.append("| 现实条件(题目原文) | R | 数学表达 | 符号 |"); L.append("|---|---|---|---|"); L.append("| 待填 | R? | 待填 | 待填 |")
-    out = arg("--out", "E:/26数模国赛/流程产物/model_spec.md")
+    out = arg("--out", "E:/26数模国赛/流程产物/正式模型.md")
     open(out, "w", encoding="utf-8").write("\n".join(L))
     print(f"OK {out} (" + ("组合链" if m_lines else "单模型") + "模式)")
 if __name__ == "__main__":

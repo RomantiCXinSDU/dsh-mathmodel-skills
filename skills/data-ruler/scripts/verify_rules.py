@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""校验 data_rules.md：规则 1-18 齐全 + 充分性节 + 依据非空 + ≥12 条有数字。"""
+"""校验 数据规则.md：规则 1-18 齐全 + 充分性节 + 依据非空 + ≥12 条有数字。"""
 import sys, re
-txt = open("E:/26数模国赛/流程产物/data_rules.md", encoding="utf-8").read()
+txt = open("E:/26数模国赛/流程产物/数据规则.md", encoding="utf-8").read()
 missing = [i for i in range(1, 19) if f"## 规则 {i} " not in txt]
 if "数据充分性检查" not in txt: missing.append("充分性节")
 basis = []

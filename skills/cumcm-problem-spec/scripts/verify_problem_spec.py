@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""校验 problem_spec.md：YAML 协议 + 必备章节 + R 编号 + 原文出处。用法: python verify_problem_spec.py [path]"""
+"""校验 拆题报告.md：YAML 协议 + 必备章节 + R 编号 + 原文出处。用法: python verify_拆题报告.py [path]"""
 import re
 import sys
 
@@ -40,7 +40,7 @@ def check(path):
     return missing
 
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else "../流程产物/problem_spec.md"
+    path = sys.argv[1] if len(sys.argv) > 1 else "../流程产物/拆题报告.md"
     missing = check(path)
     if missing:
         print(f"FAIL: {len(missing)} 处缺失/违规"); [print("  " + m) for m in missing]; sys.exit(1)

@@ -14,7 +14,7 @@ results/
 # solve_q1.py
 import pandas as pd, numpy as np, json
 df = pd.read_excel("../附件.xlsx")
-# ... 按 model_spec 实现 ...
+# ... 按 模型规格 实现 ...
 result = {"coef": ..., "p_value": ..., "r2": ...}
 json.dump(result, open("outputs/q1_result.json","w"), ensure_ascii=False, indent=2)
 print("[OUT] q1_result.json written")

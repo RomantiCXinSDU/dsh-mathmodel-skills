@@ -1,5 +1,0 @@
-# candidates.md —— 已改为"每候选一文件"模式
-
-> 候选不再是单个汇总文件。每个候选写独立文件 `candidate_XX.md`（XX∈{A1..A3,B1..B3,C1..C3}），
-> 落地到 Obsidian 库 `E:\26数模国赛\流程产物\`，格式用 [[candidate_card]] 模板（17 项 + Baseline + 可组合层）。
-> 验收：`scripts/verify_candidates.py`（目录模式）。

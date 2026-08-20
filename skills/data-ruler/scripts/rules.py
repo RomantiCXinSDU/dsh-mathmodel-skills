@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""data-ruler 确定性实现：任意 CSV → data_rules.md（规则 1-18 + 充分性骨架）。"""
+"""data-ruler 确定性实现：任意 CSV → 数据规则.md（规则 1-18 + 充分性骨架）。"""
 import pandas as pd, numpy as np, os, sys, json
 TIME_HINTS = ["week","month","year","date","time","day","period","孕周","胎龄","日期","时间","周期","季度"]
 def cfg_get():
@@ -39,10 +39,10 @@ def main():
     n_obj = int(df[id_col].nunique()) if id_col else n
     L = []; p = L.append
     p("---"); p("type: data-rules"); p("stage: ruling"); p("owner: deepseek"); p("status: draft")
-    p("upstream:"); p('  - "[[data_profile]]"')
-    p("downstream:"); p('  - "[[method_candidates]]"')
+    p("upstream:"); p('  - "[[数据概况]]"')
+    p("downstream:"); p('  - "[[方法候选]]"')
     p("---"); p("")
-    p("# data_rules.md —— 数据规则（③ data-ruler 产出）"); p("")
+    p("# 数据规则.md —— 数据规则（③ data-ruler 产出）"); p("")
     def rule(no, name, concl, basis, impact):
         p(f"## 规则 {no} {name}"); p(f"- 结论：{concl}"); p(f"- 依据：{basis}"); p(f"- 对建模的影响：{impact}"); p("")
     # A. 1-10
@@ -123,7 +123,7 @@ def main():
     rule(17, "效应量与置信区间", "报告效应量(Cohen's d / OR / 相关系数)与置信区间，不只 p 值",
          "统计检验的规范要求", "p 值显著≠效应有意义，须报告效应量与 CI")
     rule(18, "相关≠因果", "相关性不得解释为因果",
-         "相关分析仅描述关联", "题目问'影响/原因'时须因果方法（见 method_candidates）")
+         "相关分析仅描述关联", "题目问'影响/原因'时须因果方法（见 方法候选）")
     # C. 充分性骨架
     reqs = cfg.get("requirements") or []
     p("## 数据充分性检查（逐 Requirement）"); p("")
@@ -133,9 +133,9 @@ def main():
             p("已有变量：待填"); p("缺失信息：待填"); p("缺口类型：待填（变量/参数/背景知识/验证数据）")
             p("是否必须补外部数据：待确认（是/否/可选）"); p("理由：待填"); p("若不补数据：模型应该如何调整？待填"); p("")
     else:
-        p("- （待拆题结果 problem_spec 提供 Requirement 清单后，逐条填写充分性）")
+        p("- （待拆题结果 拆题报告 提供 Requirement 清单后，逐条填写充分性）")
     p("## 锁死清单（人工确认后不得改动）"); p("1. 缺失处理方式"); p("2. 离群处理方式"); p("3. 目标列与评价指标"); p("4. 独立样本单位口径")
-    open("E:/26数模国赛/流程产物/data_rules.md","w",encoding="utf-8").write("\n".join(L))
-    print(f"OK data_rules.md ({data})")
+    open("E:/26数模国赛/流程产物/数据规则.md","w",encoding="utf-8").write("\n".join(L))
+    print(f"OK 数据规则.md ({data})")
 if __name__ == "__main__":
     main()

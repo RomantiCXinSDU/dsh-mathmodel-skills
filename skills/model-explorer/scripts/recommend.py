@@ -42,8 +42,8 @@ def main():
     notes = []
     if n < 500: notes.append(f"n={n} 小样本 → 基线优先")
     if miss > 0: notes.append(f"缺失 {miss} 个 → 先定填补策略")
-    L = ["---", "type: candidates", "stage: exploration", "owner: deepseek", "status: draft",
-         "upstream:", '  - "[[data_rules]]"', '  - "[[method_candidates]]"', "downstream:", '  - "[[decision_log]]"', "---", "",
+    L = ["---", "type: 候选方案", "stage: exploration", "owner: deepseek", "status: draft",
+         "upstream:", '  - "[[数据规则]]"', '  - "[[方法候选]]"', "downstream:", '  - "[[决策日志]]"', "---", "",
          "# recommendations.md —— 候选模型空间（数据驱动种子）", ""]
     L.append(f"## 数据事实（{data}）")
     L.append(f"- 目标 {target} 为{'分类' if is_class else '回归'}型；n={n}")
